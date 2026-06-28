@@ -1,0 +1,4 @@
+repository "My project/animation@18968438687198@cloud"
+  path "/"
+    br "/main"
+    co "/main"
