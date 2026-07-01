@@ -12,6 +12,9 @@ public class ActionFigure : MonoBehaviour
     [Header("Inventory")]
     public Sprite inventoryIcon;
 
+    [Header("Hold Offset")]
+    public Vector3 holdpositionOffset;
+    public Vector3 holdrotationOffset;
     private AudioSource audioSource;
     private bool isHeld = false;
 
