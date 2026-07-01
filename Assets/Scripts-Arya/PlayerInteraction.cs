@@ -12,6 +12,8 @@ public class PlayerInteraction : MonoBehaviour
     [Header("UI (optional)")]
     public GameObject interactPromptUI; // UI "Press E to pick up"
 
+    public InventorySystem inventory;
+    
     private ActionFigure heldFigure = null;
     private ActionFigure nearbyFigure = null;
 
@@ -26,7 +28,7 @@ public class PlayerInteraction : MonoBehaviour
         // Raycast atau OverlapSphere untuk detect action figure terdekat
         Collider[] hits = Physics.OverlapSphere(transform.position, pickupRange);
         nearbyFigure = null;
-
+        
         foreach (var hit in hits)
         {
             var fig = hit.GetComponent<ActionFigure>();
@@ -62,10 +64,19 @@ public class PlayerInteraction : MonoBehaviour
         {
             DropFigure();
         }
+
+        // buat akses item
+        if (Input.GetKeyDown(KeyCode.Alpha1)) inventory.SwitchItem(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) inventory.SwitchItem(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) inventory.SwitchItem(2);
     }
 
     void PickupFigure(ActionFigure figure)
     {
+
+        Debug.Log("PickupFigure dipanggil: " + figure.gameObject.name);
+        if (!inventory.AddItem(figure)) return;
+
         heldFigure = figure;
         heldFigure.OnPickup();
 
@@ -84,11 +95,15 @@ public class PlayerInteraction : MonoBehaviour
 
     void DropFigure()
     {
+
+        Debug.Log("Drop - activeSlot: " + inventory.activeSlot);
         if (heldFigure == null) return;
 
+        inventory.RemoveItem(inventory.activeSlot);
+        heldFigure.gameObject.SetActive(true);
         heldFigure.OnDrop();
         heldFigure.transform.SetParent(null);
-
+        
         var rb = heldFigure.GetComponent<Rigidbody>();
         if (rb != null) rb.isKinematic = false;
 
@@ -96,5 +111,30 @@ public class PlayerInteraction : MonoBehaviour
         if (col != null) col.enabled = true;
 
         heldFigure = null;
+    }
+
+    public void SetHeldFigure(ActionFigure figure)
+    {
+
+        Debug.Log("SetHeldFigure dipanggil, figure: " + (figure != null ? figure.gameObject.name : "null"));
+        // Lepas item lama dari tangan dulu
+    // Sembunyikan item lama
+        if (heldFigure != null)
+        {
+            heldFigure.gameObject.SetActive(false);
+            heldFigure.OnDrop();
+        }
+
+        heldFigure = figure;
+
+        // Tampilkan item baru
+        if (heldFigure != null)
+        {
+            heldFigure.gameObject.SetActive(true);
+            heldFigure.transform.SetParent(holdPosition);
+            heldFigure.transform.localPosition = Vector3.zero;
+            heldFigure.transform.localRotation = Quaternion.identity;
+            heldFigure.OnPickup();
+        }
     }
 }

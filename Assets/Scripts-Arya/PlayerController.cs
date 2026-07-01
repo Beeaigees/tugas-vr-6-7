@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
     public float mouseSensitivity = 100f;
     public Transform cameraTransform; // drag Main Camera ke sini
 
+    [Header("Footstep Sound")]
+    public AudioClip footstepSound;
+    private AudioSource footstepSource;
+
     Animator animator;
 
     int IsWalkingHash;
@@ -21,6 +25,14 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+
+        footstepSource = gameObject.GetComponent<AudioSource>();
+        if (footstepSource == null)
+            footstepSource = gameObject.AddComponent<AudioSource>();
+        footstepSource.clip = footstepSound;
+        footstepSource.loop = true;
+        footstepSource.playOnAwake = false;
+        footstepSource.spatialBlend = 0f;
         controller = GetComponent<CharacterController>();
 
         // Lock & sembunyikan cursor
@@ -87,11 +99,27 @@ public class PlayerController : MonoBehaviour
         float x = Input.GetAxis("Horizontal"); // A D
         float z = Input.GetAxis("Vertical");   // W S
 
-        Vector3 move = transform.right * x + transform.forward * z;
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        float currentSpeed = isRunning ? 5f : 3f;
 
+        Vector3 move = transform.right * x + transform.forward * z;
+        controller.Move(move * currentSpeed * Time.deltaTime);
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    
+        bool isMoving = (Mathf.Abs(x) > 0.1f || Mathf.Abs(z) > 0.1f) && controller.isGrounded;
+
+        if (isMoving)
+        {
+            footstepSource.pitch = isRunning ? 1.5f : 1f;
+            if (!footstepSource.isPlaying)
+                footstepSource.Play();
+        }
+        else
+        {
+            if (footstepSource.isPlaying)
+                footstepSource.Stop();
+        }
     }
 
     void HandleLook()

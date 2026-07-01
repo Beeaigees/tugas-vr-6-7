@@ -9,6 +9,9 @@ public class ActionFigure : MonoBehaviour
     [Header("Settings")]
     public float interactRange = 2f;
 
+    [Header("Inventory")]
+    public Sprite inventoryIcon;
+
     private AudioSource audioSource;
     private bool isHeld = false;
 
