@@ -82,8 +82,8 @@ public class PlayerInteraction : MonoBehaviour
 
         // Attach ke tangan player
         figure.transform.SetParent(holdPosition);
-        figure.transform.localPosition = Vector3.zero;
-        figure.transform.localRotation = Quaternion.identity;
+        figure.transform.localPosition = figure.holdpositionOffset;
+        figure.transform.localRotation = Quaternion.Euler(figure.holdrotationOffset);
 
         // Matikan physics sementara
         var rb = figure.GetComponent<Rigidbody>();
@@ -118,7 +118,7 @@ public class PlayerInteraction : MonoBehaviour
 
         Debug.Log("SetHeldFigure dipanggil, figure: " + (figure != null ? figure.gameObject.name : "null"));
         // Lepas item lama dari tangan dulu
-    // Sembunyikan item lama
+        // Sembunyikan item lama
         if (heldFigure != null)
         {
             heldFigure.gameObject.SetActive(false);
@@ -132,8 +132,8 @@ public class PlayerInteraction : MonoBehaviour
         {
             heldFigure.gameObject.SetActive(true);
             heldFigure.transform.SetParent(holdPosition);
-            heldFigure.transform.localPosition = Vector3.zero;
-            heldFigure.transform.localRotation = Quaternion.identity;
+            heldFigure.transform.localPosition = figure.holdpositionOffset;
+            heldFigure.transform.localRotation = Quaternion.Euler(figure.holdrotationOffset);
             heldFigure.OnPickup();
         }
     }
