@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "tugas-vr-6-7.slnx",
+    "dotnet.defaultSolution": "tugas-vr-6-7-2026-07-01-02-41-52.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }
