@@ -32,7 +32,7 @@ public class ActionFigure : MonoBehaviour
     {
         isHeld = true;
         if (pickupSound != null)
-            audioSource.PlayOneShot(pickupSound);
+            audioSource.PlayOneShot(pickupSound, 0.5f);
     }
 
     public void OnInteract()
@@ -40,7 +40,7 @@ public class ActionFigure : MonoBehaviour
         if(!isHeld) return;
 
         if (interactSound != null)
-        audioSource.PlayOneShot(interactSound);
+        audioSource.PlayOneShot(interactSound, 0.5f);
     }
 
     public void OnDrop()
