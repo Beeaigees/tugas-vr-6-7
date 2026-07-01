@@ -1,0 +1,3 @@
+repository "My project/animation@18968438687198@cloud"
+  path "/"
+    smartbranch "/main/branch-arya"
