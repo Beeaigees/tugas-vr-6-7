@@ -22,16 +22,16 @@ public class ZombieSound : MonoBehaviour
     // Fungsi-fungsi ini dipanggil lewat Animation Event
     public void PlayGroan()
     {
-        audioSource.PlayOneShot(zombieGroan, 0.2f);
+        audioSource.PlayOneShot(zombieGroan, 0.1f);
     }
 
     public void PlayHeadBang()
     {
-        audioSource.PlayOneShot(headBangSound, 0.2f);
+        audioSource.PlayOneShot(headBangSound, 0.1f);
     }
 
     public void PlayDeath()
     {
-        audioSource.PlayOneShot(zombieDeathSound, 0.2f);
+        audioSource.PlayOneShot(zombieDeathSound, 0.1f);
     }
 }
