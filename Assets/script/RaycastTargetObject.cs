@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class RaycastTargetObject : MonoBehaviour
 {
-    public string interactLabel = "[E] Interact";
+    public string interactLabel = "[B] Interact";
     public string lockedLabel = "Locked";
     public UnityEvent onInteract;
 

@@ -13,12 +13,12 @@ public class KeyItem : MonoBehaviour
     public void PickUp()
     {
         // Cari KeyHolder
-        KeyHolder holder = FindObjectOfType<KeyHolder>();
+        KeyHolder holder = Object.FindAnyObjectByType<KeyHolder>();
         if (holder != null)
             holder.PickUpKey(keyID);
 
         // Cari PlayerInventory — masukin ke slot
-        PlayerInventory inv = FindObjectOfType<PlayerInventory>();
+        PlayerInventory inv = Object.FindAnyObjectByType<PlayerInventory>();
         if (inv != null)
         {
             bool added = inv.AddItem(keyID);

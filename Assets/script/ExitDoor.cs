@@ -41,7 +41,7 @@ public class ExitDoor : MonoBehaviour
         if (playerKeyHolder == null)
         {
             // Auto cari KeyHolder di scene
-            playerKeyHolder = FindObjectOfType<KeyHolder>();
+            playerKeyHolder = Object.FindAnyObjectByType<KeyHolder>();
         }
 
         if (playerKeyHolder == null)
@@ -77,7 +77,7 @@ public class ExitDoor : MonoBehaviour
         if (_isOpen) return "Door is open";
 
         if (playerKeyHolder == null)
-            playerKeyHolder = FindObjectOfType<KeyHolder>();
+            playerKeyHolder = Object.FindAnyObjectByType<KeyHolder>();
 
         if (playerKeyHolder == null) return "[E] Open Exit";
 

@@ -43,6 +43,8 @@ public class ProximityCanvasShow : MonoBehaviour
             + " | radius: " + _showRadius);
 
         _canvas.SetActive(dist <= _showRadius);
+
+        Hide();
     }
 
     // Fungsi Show/Hide tetap ada buat lukisan
