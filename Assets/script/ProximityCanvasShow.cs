@@ -39,8 +39,7 @@ public class ProximityCanvasShow : MonoBehaviour
         );
 
         // Debug jarak
-        Debug.Log(gameObject.name + " jarak ke player: " + dist 
-            + " | radius: " + _showRadius);
+
 
         _canvas.SetActive(dist <= _showRadius);
 

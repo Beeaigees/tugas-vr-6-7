@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed = 5f;
+    public float moveSpeed = 1f;
     public float gravity = -9.81f;
 
     [Header("Look")]
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
         float z = Input.GetAxis("Vertical");   // W S
 
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float currentSpeed = isRunning ? 5f : 3f;
+        float currentSpeed = isRunning ? 2.5f : 1f;
 
         Vector3 move = transform.right * x + transform.forward * z;
         controller.Move(move * currentSpeed * Time.deltaTime);
